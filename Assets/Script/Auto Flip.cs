@@ -1,31 +1,35 @@
 using UnityEngine;
 
-public class CarAutoFlip : MonoBehaviour
+public class AutoFlip : MonoBehaviour
 {
-    public float flipForce = 5f;
-    public float checkDelay = 2f;
+    private float flipTimer = 0f;
+    private Rigidbody rb;
 
-    private float timer = 0f;
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     void Update()
     {
-        // ถ้ารถคว่ำ (หัวลง)
-        if (Vector3.Dot(transform.up, Vector3.down) > 0.5f)
+        if (transform.up.y < 0.3f)
         {
-            timer += Time.deltaTime;
+            flipTimer += Time.deltaTime;
 
-            if (timer > checkDelay)
+            if (flipTimer > 2f)
             {
-                // พลิกกลับ
                 transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
                 transform.position += Vector3.up * 1f;
 
-                timer = 0f;
+                rb.linearVelocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+
+                flipTimer = 0f;
             }
         }
         else
         {
-            timer = 0f;
+            flipTimer = 0f;
         }
     }
 }
