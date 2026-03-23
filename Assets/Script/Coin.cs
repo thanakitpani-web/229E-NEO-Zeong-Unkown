@@ -7,7 +7,12 @@ public class Coin : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             ScoreManager.instance.AddScore(1);
-            Destroy(gameObject);
+
+            // ลบ Destroy
+            // Destroy(gameObject);
+
+            // ซ่อนแทน
+            gameObject.SetActive(false);
         }
     }
 }

@@ -8,6 +8,10 @@ public class CarController : MonoBehaviour
     public float turnSpeed = 100f;
 
     private float currentSpeed = 0f;
+    public void ResetCar()
+    {
+        currentSpeed = 0f;
+    }
 
     void Update()
     {
@@ -43,4 +47,5 @@ public class CarController : MonoBehaviour
         // เคลื่อนที่
         transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
     }
+
 }
