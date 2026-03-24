@@ -60,7 +60,14 @@ public class FallReset : MonoBehaviour
 
         if (RestartButton != null)
             RestartButton.SetActive(true);
+       
+        CarController car = GetComponent<CarController>();
+        if (car != null)
+        {
+            car.enabled = true;
+        }
     }
+
 
 }
 
