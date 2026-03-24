@@ -13,6 +13,7 @@ public class ScoreManager : MonoBehaviour
     public GameObject restartButton;
     public GameObject RestartButton;
     public GameObject exitButton;
+    public GameObject creditText;
     void Awake()
     {
         instance = this;
@@ -30,6 +31,9 @@ public class ScoreManager : MonoBehaviour
 
         if (RestartButton != null)
             RestartButton.SetActive(false);
+
+        if (creditText != null)
+            creditText.SetActive(false);
     }
     public void AddScore(int amount)
     {
@@ -43,6 +47,7 @@ public class ScoreManager : MonoBehaviour
             restartButton.SetActive(true);
             exitButton.SetActive(true);
             RestartButton.SetActive(true);
+            creditText.SetActive(true);
 
             Rigidbody rb = player.GetComponent<Rigidbody>();
             rb.linearVelocity = Vector3.zero;
