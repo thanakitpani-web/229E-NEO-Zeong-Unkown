@@ -2,24 +2,23 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform target;
-    public float smoothSpeed = 5f;
+    public Transform target;      // ตัวละคร
+    public Vector3 offset;        // ระยะห่างกล้อง
+    public float smoothTime = 0.3f;
 
-    public Vector3 offset = new Vector3(0, 3, -6);
+    private Vector3 velocity = Vector3.zero;
 
     void LateUpdate()
     {
         if (target == null) return;
 
-        
-        Vector3 desiredPosition = target.position + target.rotation * offset;
+        Vector3 targetPosition = target.position + offset;
 
-        transform.position = Vector3.Lerp(
+        transform.position = Vector3.SmoothDamp(
             transform.position,
-            desiredPosition,
-            smoothSpeed * Time.deltaTime
+            targetPosition,
+            ref velocity,
+            smoothTime
         );
-
-        transform.LookAt(target);
     }
 }
