@@ -1,24 +1,29 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
+public class Follow : MonoBehaviour
 {
-    public Transform target;      // ตัวละคร
-    public Vector3 offset;        // ระยะห่างกล้อง
-    public float smoothTime = 0.3f;
+    public GameObject Target = null;
+    public GameObject T = null;
+    public float speed = 1.5f;
+    public int index;
 
-    private Vector3 velocity = Vector3.zero;
-
-    void LateUpdate()
+    void Start()
     {
-        if (target == null) return;
+        Target = GameObject.FindGameObjectWithTag("Player");
+        T = GameObject.FindGameObjectWithTag("Target");
+    }
 
-        Vector3 targetPosition = target.position + offset;
+    void Update()
+    {
 
-        transform.position = Vector3.SmoothDamp(
-            transform.position,
-            targetPosition,
-            ref velocity,
-            smoothTime
-        );
+    }
+
+    void FixedUpdate()
+    {
+        this.transform.LookAt(Target.transform);
+        float car_Move = Mathf.Abs(Vector3.Distance(this.transform.position, T.transform.position) * speed);
+        this.transform.position = Vector3.MoveTowards(this.transform.position, T.transform.position, car_Move * Time.deltaTime);
     }
 }
